@@ -40,13 +40,24 @@ while True:
 
         # Send POST to 10.10.11.170:8080/search
         r = requests.post("http://10.10.11.170:8080/search", data={"name": payload})
+
+        if r.status_code != 200:
+            print(r.content.decode())
+            continue
         
         # Parse Response
         parsed = BeautifulSoup(r.content.decode(), "lxml")
-        print(parsed.body.find("h2", attrs={"class": "searched"}).text)
+
+        try:
+            print(parsed.body.find("h2", attrs={"class": "searched"}).text)
+        except Exception as e:
+            print("Error!")
+            print(r.content.decode())
+
     except Exception as e:
         print("Error!")
         print(e)
         sys.exit(1)
 
     i += 1
+
