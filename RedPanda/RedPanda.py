@@ -1,3 +1,8 @@
+"""
+RedPanda.py
+- Sends command to the RedPanda machine as user and reads it's response
+"""
+
 # Libraries
 import requests
 import sys
